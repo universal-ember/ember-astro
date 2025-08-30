@@ -1,0 +1,11 @@
+packages:
+  - "."
+  - "./docs"
+
+autoInstallPeers: false
+
+peersSuffixMaxLength: 40
+dedupeInjectedDeps: true
+dedupePeerDependents: true
+
+resolutionMode: highest
