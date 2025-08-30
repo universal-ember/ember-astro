@@ -1,0 +1,26 @@
+name: CI
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+##############################################################
+
+jobs:
+  lints:
+    name: "Lints"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [install_dependencies]
+
+    steps:
+      - uses: wyvox/action@v1
+      - run: pnpm lint
