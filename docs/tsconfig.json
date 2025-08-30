@@ -1,11 +1,11 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"],
-  "compilerOptions": {
-    "types": ["ember-source/types", "vite/client"],
-    "paths": {
-      "ember-astro": ".."
-    }
-  }
+	"extends": "astro/tsconfigs/strict",
+	"include": [".astro/types.d.ts", "**/*"],
+	"exclude": ["dist"],
+	"compilerOptions": {
+		"types": ["ember-source/types", "vite/client"],
+		"paths": {
+			"ember-astro": ".."
+		}
+	}
 }

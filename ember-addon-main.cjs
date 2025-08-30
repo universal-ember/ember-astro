@@ -1,3 +1,3 @@
 module.exports = {
-    name: 'ember-astro'
-}
+	name: "ember-astro",
+};

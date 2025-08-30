@@ -3,5 +3,5 @@
  * @type {import("prettier").Config}
  */
 export default {
-  plugins: ['prettier-plugin-ember-template-tag'],
-}
+	plugins: ["prettier-plugin-ember-template-tag"],
+};

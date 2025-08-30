@@ -1,6 +1,6 @@
 // waiting on renderComponent
 // https://github.com/emberjs/ember.js/pull/20962
-import { renderApp } from './render-app-island.js';
+import { renderApp } from "./render-app-island.js";
 
 /**
  * @type {WeakMap<HTMLElement, unknown>}
@@ -8,22 +8,22 @@ import { renderApp } from './render-app-island.js';
 const existingApplications = new WeakMap();
 
 export default function emberAstroClientRenderer(element) {
-  return async (component, props, slotted) => {
-    console.log({ component, props, slotted });
+	return async (component, props, slotted) => {
+		console.log({ component, props, slotted });
 
-    if (!element.hasAttribute('ssr')) return;
+		if (!element.hasAttribute("ssr")) return;
 
-    if (existingApplications.has(element)) {
-      console.log('Should update props?');
-      // existingApplications.get(element)!.setProps(resolvedProps);
-      return;
-    }
+		if (existingApplications.has(element)) {
+			console.log("Should update props?");
+			// existingApplications.get(element)!.setProps(resolvedProps);
+			return;
+		}
 
-    let result = await renderApp({ element, component });
+		let result = await renderApp({ element, component });
 
-    existingApplications.set(element, result);
-    element.addEventListener('astro:unmount', () => result.destroy(), { once: true });
-  };
+		existingApplications.set(element, result);
+		element.addEventListener("astro:unmount", () => result.destroy(), { once: true });
+	};
 }
 
 // // waiting on renderComponent
