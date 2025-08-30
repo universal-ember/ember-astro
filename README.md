@@ -65,6 +65,8 @@ import HelloWorld from '../components/demo.gjs';
 
 ## Differences in using `.astro` vs `.gjs` (or `.gts`)
 
+### Props vs Args
+
 Normally, in Ember arguments start with `@` (e.g.: `@foo`) and element attributes without (e.g.:
 `foo`).
 
@@ -90,15 +92,15 @@ const two = 2;
 </body>
 ```
 
-`foo` will be seen to `MyComponent` as `@foo`, and passing attributes directly is not possible -- so
+`foo` will be seen to `MyComponent` as `@props.foo`, and passing attributes directly is not possible -- so
 `style` (normally passed along to whatever element MyComponent places `...attributes` on) will also
-be an argument, `@style`. So `MyComponent` may look like this:
+be an argument, `@props.style`. So `MyComponent` may look like this:
 
 ```gjs
 <template>
-	<div style={{@style}} ...attributes>
+	<div style={{@props.style}} ...attributes>
 		^ this syntax is unusable when invoked from Astro components
-		{{@foo}}
+		{{@props.foo}}
 	</div>
 </template>
 ```
@@ -106,3 +108,51 @@ be an argument, `@style`. So `MyComponent` may look like this:
 With the manually specified attributes in the element space positioned _before_ `...attributes`, the
 component can still _also_ be used in other ember components where `...attributes` would work, and
 override any accidental attribute-as-argument passing.
+
+### Slots
+
+in Astro, slots are just strings of HTML, not any value or anything that can be integrated with.
+So unlike `{{yield to="name"}}`, components will have to `{{{@slots.name}}}`. Note the triple
+`{{{` -- this tells the framework to not perform any safety checks and to just insert the string
+as HTML.
+
+For example, in astro:
+```html
+<Demo client:only="ember">
+  content here
+</Demo>
+```
+The ember component that renders this would be written as:
+```gjs
+export const Demo = 
+  <template>
+    {{{@slots.default}}}
+  </template>;
+```
+Instead of the traditional:
+```gjs
+export const Demo = 
+  <template>
+    {{yield}}
+  </template>;
+```
+
+This also means that there are no block params available in astro.
+So, in ember we are used to:
+```gjs
+Import { Demo } from './demo.gjs';
+
+<template>
+  <Demo as |x|>
+    {{x.value}}
+    <x.component />
+    <div {{x.modifier}}>...</div>
+  </Demo>
+</template>
+```
+However, this is not possible to replicate in Astro.
+
+## Ignoring the limitations
+
+If you'd like to ignore Astro's component limitations, you can import an ember component, with the
+known limitations of Astro, and from within there, build out your page / micro-application in Ember.
