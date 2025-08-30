@@ -75,7 +75,8 @@ const foo = 2;
 
 <template>
 	<MyComponent @foo={{2}} foo={{2}} />
-	^ argument | ^ attribute
+	{{!          ^ argument |           }}
+	{{!                     ^ attribute }}
 </template>
 ```
 
@@ -99,7 +100,7 @@ be an argument, `@props.style`. So `MyComponent` may look like this:
 ```gjs
 <template>
 	<div style={{@props.style}} ...attributes>
-		^ this syntax is unusable when invoked from Astro components
+		{{!                     ^ this syntax is unusable when invoked from Astro components }}
 		{{@props.foo}}
 	</div>
 </template>
@@ -117,28 +118,26 @@ So unlike `{{yield to="name"}}`, components will have to `{{{@slots.name}}}`. No
 as HTML.
 
 For example, in astro:
+
 ```html
-<Demo client:only="ember">
-  content here
-</Demo>
+<Demo client:only="ember"> content here </Demo>
 ```
+
 The ember component that renders this would be written as:
+
 ```gjs
-export const Demo = 
-  <template>
-    {{{@slots.default}}}
-  </template>;
+export const Demo = <template>{{{@slots.default}}}</template>;
 ```
+
 Instead of the traditional:
+
 ```gjs
-export const Demo = 
-  <template>
-    {{yield}}
-  </template>;
+export const Demo = <template>{{yield}}</template>;
 ```
 
 This also means that there are no block params available in astro.
 So, in ember we are used to:
+
 ```gjs
 Import { Demo } from './demo.gjs';
 
@@ -150,6 +149,7 @@ Import { Demo } from './demo.gjs';
   </Demo>
 </template>
 ```
+
 However, this is not possible to replicate in Astro.
 
 ## Ignoring the limitations

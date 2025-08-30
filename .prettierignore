@@ -4,3 +4,5 @@ dist/
 *.yaml
 *.yml
 *.html
+CHANGELOG.md
+.release-plan.json
