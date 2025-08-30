@@ -1,10 +1,9 @@
-import { ember, extensions } from "@embroider/vite";
+import { ember as emberVite, extensions } from "@embroider/vite";
 import { babel } from "@rollup/plugin-babel";
 import { buildMacros } from "@embroider/macros/babel";
 import { createRequire } from "node:module";
 
 const macros = buildMacros();
-const require = createRequire(import.meta.url);
 
 function getRenderer() {
 	return {
@@ -21,7 +20,7 @@ export function getContainerRenderer() {
 	};
 }
 
-export default function emberIntegration(/* options */) {
+function emberIntegration(/* options */) {
 	return {
 		name: "ember-astro",
 		hooks: {
@@ -33,7 +32,7 @@ export default function emberIntegration(/* options */) {
 				updateConfig({
 					vite: {
 						plugins: [
-							ember(),
+							emberVite(),
 							babel({
 								babelHelpers: "runtime",
 								extensions,
@@ -84,3 +83,5 @@ export default function emberIntegration(/* options */) {
 		},
 	};
 }
+
+export const ember = emberIntegration;
