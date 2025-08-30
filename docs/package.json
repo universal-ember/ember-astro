@@ -1,7 +1,11 @@
 {
 	"name": "docs-for-ember-astro",
 	"type": "module",
+	"private": true,
 	"version": "0.0.1",
+	"imports": {
+		"#components/*": "./src/components/*"
+	},
 	"scripts": {
 		"dev:harder": "rm -rf .astro node_modules/.vite node_modules/.astro ; pnpm astro dev",
 		"dev": "astro dev",

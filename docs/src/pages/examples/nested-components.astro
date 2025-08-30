@@ -1,0 +1,15 @@
+---
+import { Outer, Inner } from './nested-components.gjs';
+---
+
+<html>
+  <body>
+    <h1>Example: Nested Components</h1>
+
+		<fieldset><legend>Demo</legend>
+			<Outer client:only="ember">
+				<Inner client:only="ember">
+			</Outer>
+		</fieldset>
+  </body>
+</html>

@@ -8,6 +8,9 @@ export default class HelloWorld extends Component {
 	increment = () => (this.count += 1);
 
 	<template>
+		{{{@slots.fallback}}}
+
+		{{@props.greet}}
 		<p>You have clicked the button {{this.count}} times.</p>
 
 		<button type="button" {{on "click" this.increment}}>Click</button>

@@ -1,0 +1,17 @@
+---
+import { Demo } from './named-slots.gjs';
+---
+
+<html>
+  <body>
+    <h1>Example: Named Slots</h1>
+
+		<fieldset><legend>Demo</legend>
+			<Demo client:only="ember">
+				<div slot="one">one</div>
+				<div slot="two">two</div>
+				<div slot="three">three</div>
+			</Demo>
+		</fieldset>
+  </body>
+</html>
