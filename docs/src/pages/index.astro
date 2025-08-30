@@ -5,7 +5,7 @@ import HelloWorld from '../components/demo.gjs';
 <html>
   <body>
     <h1>Use Ember components directly in Astro!</h1>
-    <HelloWorld client:only="ember-astro">
+    <HelloWorld client:only="ember-astro" greet="world">
       <div slot="fallback">Loading...</div>
     </HelloWorld>
   </body>
