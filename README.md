@@ -5,7 +5,7 @@ Ember integration with [astro.build](https://astro.build/)
 ## Install
 
 ```
-pnpm add ember-astro
+pnpm add ember-astro ember-source@6.7.0-beta.1
 ```
 
 ## Setup
